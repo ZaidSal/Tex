@@ -1,0 +1,395 @@
+\documentclass[12pt]{report}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{geometry}
+\usepackage{xcolor}
+\usepackage{fancyhdr}
+\usepackage{setspace}\doublespacing % for double spacing
+\usepackage{indentfirst}
+\usepackage{appendix}
+\usepackage{titlesec}
+\usepackage{natbib}
+\usepackage{url}
+\usepackage{etoolbox}
+\usepackage{pdfpages}
+
+\makeatletter
+\patchcmd{\@citex}{\hskip\@citepunct}{\hskip\@citepunct\footnotesize}{}{}
+\makeatother
+
+\titleformat{\chapter}[block] % Change 'hang' to 'block' for one-liner titles
+  {\normalfont\Large\bfseries\color{black}} % Large font size for the title, change as needed
+  {\thechapter.} % Chapter number
+  {0.5em} % Space between chapter number and title
+  {} % Before-code
+  [{\color{darkblue}\titlerule[2pt]}] % After-code - dark blue line after the title
+
+% Adjust the space after the chapter title and the rule
+\titlespacing*{\chapter}
+  {0pt} % Left spacing
+  {-50pt} % Space before the title
+  {20pt} % Space after the title
+
+\titleformat{\section}  % which section command to format
+  {\fontsize{14}{16}\bfseries} % format for whole line
+  {\thesection} % how to show number
+  {1em} % space between number and text
+  {} % formatting for just the text
+  [] % formatting for after the text
+
+\titleformat{\subsection}  % which section command to format
+  {\fontsize{10}{12}\sffamily} % format for whole line
+  {\S\thesubsection} % how to show number
+  {2em} % space between number and text
+  {\color{blue}} % formatting for just the text
+  [] % formatting for after the text
+% Define page geometry
+\geometry{a4paper, top=1in, bottom=1in, left=1in, right=1in}
+
+% Define colors
+\definecolor{darkblue}{rgb}{0.278,0.412,0.576}
+\definecolor{darkred}{rgb}{0.5,0,0}
+
+% Define the header to include the Yarmouk University information
+\fancypagestyle{firstpage}{
+  \fancyhf{}
+  \lhead{ 
+         {\Large \textbf{Yarmouk University}} \\ \vspace{1.0mm}
+         {\large \textbf{Hijjawi Faculty for Engineering Technology}}\\
+         \vspace{1.0mm}
+         {\large \textbf{Department of Computer Engineering}}
+  }
+  \rhead{\includegraphics[width=0.15\textwidth]{images/yarmouk_university_logo.png}}
+
+  \renewcommand{\headrulewidth}{0pt} % No horizontal line in header
+  
+  
+}
+\renewcommand{\bibname}{References}
+
+
+
+\begin{document}
+
+
+% Title Page
+\begin{titlepage}
+\thispagestyle{firstpage} % Apply the header style to the current page
+
+   \vspace*{0.5cm}
+    \noindent\textcolor{darkred}{\rule{15.5cm}{1mm}}
+    \vspace{2cm}
+   \begin{center}
+  
+       {\Large\bfseries Graduation Project Report\par}
+   \vspace{2cm} % Adjust space after the title
+   {\huge\bfseries Enhancing Network Connectivity for Yarmouk University using Fortinet products\par}
+   \vspace{2cm} % Adjust space before student names and IDs
+   {\large\bfseries Omar B. Talafhah - 2020980115 \\ 
+   Zaid F. Salameh - 2020980118 \par}
+   \vspace{0.5cm}
+   {\large\bfseries Supervisor: Prof. Ola Taani\par}
+   \vfill % Push the following text to the bottom of the page
+   Semester: Summer 2023/2024\par
+   Date: \today
+   \end{center}
+   \thispagestyle{firstpage} 
+\end{titlepage}
+% Declaration Page
+\pagenumbering{roman}
+\newpage
+\section*{Students' Property Right Declaration and Anti-Plagiarism Statement}
+
+We hereby declare that the work in this graduation project at Yarmouk University is our own except for quotations and summaries which have been duly acknowledged. This work has not been accepted for any degree and is not concurrently submitted for award of other degrees. It is the sole property of Yarmouk University and it is protected under the intellectual property right laws and conventions.
+We hereby declare that this report is our own work except from properly referenced quotations and contains no plagiarism.
+We have read and understood the school's rules on assessment offenses, which are available at Yarmouk University Handbook. \\
+\begin{center}
+\vspace{1cm}
+Name: Omar B. Talafhah \hspace{3cm} Signature: 
+
+Name: Zaid F. Salameh  \hspace{3.3cm} Signature: 
+
+\addcontentsline{toc}{chapter}{Students' Property Right Declaration and Anti-Plagiarism Statement}
+
+\end{center}
+
+% Table of Contents, List of Tables/Figures
+\newpage
+\tableofcontents
+\newpage
+\listoftables
+\newpage
+\listoffigures
+
+% Chapters
+\newpage
+\chapter*{Abstract}
+Yarmouk University, like many other universities, 
+has a large campus with many buildings and facilities. 
+The university's network infrastructure is sort of outdated and does not provide 
+adequate coverage for all areas, and connecting to the web servers in the university from outside can 
+be a headache when more people are trying to access them.
+This project aims to enhance the network connectivity for Yarmouk University 
+by using Fortinet products. 
+
+\textbf{Fortinet} is a network security company that provides relatively cheap, modern, and easy-to-use and maintain products that can also easily provide a great level of network security through different measures.
+Fortinet relies heavily on the use of \textbf{FortiGate} devices, which are firewalls that can be used to secure the network, as well as managing any Fortinet device connected to it.
+This project will implement a Hierarchical networking design for the main university building and another one for the South building, and connect them using \textbf{Site-To-Site VPN} to provide a secure connection between the two buildings.
+This project will also include a protection layer for the data center in the university using \textbf{DMZ} where the DMZ will include web servers and any service that is ok to be public.
+The project will also implement a Web Application Firewall to protect the web servers in the university from any attacks.
+One of the main focuses of this project is to provide redundancy and load balancing for the network using 
+various technologies like \textbf{SD-WAN} and link monitoring for Internet connectivity and \textbf{High Availability (HA)} for FortiGate redundancy.
+FortiGates will also provide services like \textbf{Web Filtering} and \textbf{Application Control} to control the network traffic and prevent any unwanted traffic from entering the network.
+We will be using various Fortinet products like FortisSwitches, FortiAPs, FortiAnalyzer, and FortiManager to provide a complete solution for the university's network infrastructure.
+
+\addcontentsline{toc}{chapter}{Abstract}
+\clearpage
+\pagenumbering{arabic}
+\chapter{Introduction}
+\section{Problem Statement and Purpose}
+This Project aims to enhance university networking by making it more secure, 
+reliable, easier and cheaper to obtain and maintain, and provide a better user experience for the students and staff.
+
+\section{Background}
+Yarmouk University holds more than 41,000 students \cite{YU} and has many schools and departments, yet, the network infrastructure is outdated and does not provide adequate coverage for all areas, and connecting to the web servers in the university from outside can be a nightmare during peak times. For example, system responsiveness during registration on the \date{19th of May, 2024} was not that great, especially that only those who are expected to graduate can register.
+\section{Aims and objectives}
+The main aim of this project is to enhance the network connectivity for Yarmouk University by using Fortinet products. The objectives of this project are:
+\begin{itemize}
+    \item Implement a Hierarchical networking design for the main university campus and another one for the South campus.
+    \item Connect the two campuses using Site-To-Site VPN to provide a secure connection between the two campuses.
+    \item Implement a protection layer for the data center in the university using demilitarized zone (DMZ).
+    \item Implement a Web Application Firewall to protect the web servers in the university from any attacks.
+    \item Provide redundancy and load balancing for the network using various technologies like software-defined wide area network (SD-WAN) and link monitoring for Internet connectivity.
+    \item Provide High Availability (HA) for FortiGate redundancy.
+    \item Provide services like Web Filtering and Application Control to control the network traffic and prevent any unwanted traffic from entering the network.
+    \item Use various Fortinet products like FortiSwitches, FortiAPs, FortiAnalyzer, and FortiManager to provide a complete solution for the university's network infrastructure.
+\end{itemize}
+
+\section{Current solutions}
+% TODO: rewrite this section
+% After SIS update in December 2023, the system responsiveness has improved, we couldn't get information from the YU IT department about the current network infrastructure since such information is confidential. But the overall behavior of the network suggests that they are using cheap products that is not suitable for the site.
+\section{Our solution}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{images/Fortinet.png}
+    \caption{Fortinet Logo \cite{FTLogo}}
+    \label{fig:fortinet logo}
+\end{figure}
+% TODO: Cite all FortiDevices:tm:
+Fortinet is a network security company, based in California, USA. It provides relatively cheap, modern, and easy-to-use and maintain products that can also easily provide a great level of network security through different measures. Fortinet relies heavily on the use of FortiGate devices, which are firewalls that can be used to secure the network, as well as managing any Fortinet device connected to it. Fortinet also provides other products like FortiSwitches, FortiAPs, FortiAnalyzer, and FortiManager to provide a complete solution for the network infrastructure. 
+We suggest converting to Fortinet products for its great security and ease of use and maintenance, as well as it being cheaper relative to Cisco \cite{Cheaper} and other competitors.
+Our solution will include a full topology for the main university and the south campus, as well as the secure connection between them. It will also include many solutions that will provide redundancy and load balancing for the network.
+Our solution will also include a protection layer for the data center in the university using DMZ, and a Web Application Firewall to protect the web servers in the university from any attack that may occur.
+\section{Key Technical Details}
+
+\subsection{Network Topology}
+\begin{itemize}
+    \item Hierarchical design for main and south campuses.
+    \item Core, distribution, and access layers.
+    \item Layout of FortiGate firewalls, FortiSwitches, and FortiAPs.
+\end{itemize}
+
+\subsection{FortiGate Firewalls}
+\begin{itemize}
+    \item Secure the network.
+    \item Configure firewall rules, NAT, and security policies.
+    \item High Availability (HA) for redundancy.
+\end{itemize}
+
+\subsection{Site-to-Site VPN}
+\begin{itemize}
+    \item Secure connection between campuses.
+    \item Encryption protocols and VPN policies.
+\end{itemize}
+
+\subsection{Demilitarized Zone (DMZ)}
+\begin{itemize}
+    \item Protect the data center.
+    \item Public services in the DMZ.
+    \item Access control policies.
+\end{itemize}
+
+\subsection{Web Application Firewall (WAF)}
+\begin{itemize}
+    \item Protect web servers from attacks.
+    \item Configure WAF rules and profiles.
+\end{itemize}
+
+\subsection{Software-Defined WAN (SD-WAN)}
+\begin{itemize}
+    \item Provide redundancy and optimize traffic.
+    \item Link monitoring and failover.
+\end{itemize}
+
+\subsection{Network Security Services}
+\begin{itemize}
+    \item \textbf{Web Filtering}: Block inappropriate/malicious websites.
+    \item \textbf{Application Control}: Manage network applications.
+    \item \textbf{Intrusion Prevention System (IPS)}: Detect and prevent intrusions.
+\end{itemize}
+
+\subsection{Network Management and Monitoring}
+\begin{itemize}
+    \item FortiAnalyzer for logging and reporting.
+    \item FortiManager for centralized management.
+    \item Network monitoring tools.
+\end{itemize}
+
+\subsection{Wireless Network}
+\begin{itemize}
+    \item FortiAPs for campus coverage.
+    \item Configure SSIDs, security settings, and VLANs.
+\end{itemize}
+
+\subsection{Load Balancing and Redundancy}
+\begin{itemize}
+    \item Load balancing for critical resources.
+    \item Redundant links and devices for availability.
+\end{itemize}
+
+\subsection{Network Access Control (NAC)}
+\begin{itemize}
+    \item Control device access to the network.
+    \item Authentication and authorization policies.
+\end{itemize}
+
+\subsection{Scalability and Future-proofing}
+\begin{itemize}
+    \item Future network expansion considerations.
+    \item Flexible design for new technologies.
+\end{itemize}
+
+\subsection{Example Configuration Details}
+
+\subsubsection{FortiGate Firewall Configuration Example} 
+\begin{verbatim}
+config system interface
+    edit "port1"
+        set mode static
+        set ip 192.168.1.1/24
+    next
+end
+
+config firewall policy
+    edit 1
+        set srcintf "port1"
+        set dstintf "port2"
+        set srcaddr "all"
+        set dstaddr "all"
+        set action accept
+        set schedule "always"
+        set service "ALL"
+        set logtraffic all
+    next
+end
+\end{verbatim}
+
+\subsubsection{Site-to-Site VPN Configuration Example}
+\begin{verbatim}
+config vpn ipsec phase1-interface
+    edit "VPN-to-SouthCampus"
+        set interface "port1"
+        set peertype any
+        set net-device enable
+        set proposal aes256-sha256
+        set remote-gw 192.168.2.1
+        set psksecret your_psk_secret
+    next
+end
+
+config vpn ipsec phase2-interface
+    edit "VPN-to-SouthCampus"
+        set phase1name "VPN-to-SouthCampus"
+        set proposal aes256-sha256
+        set src-subnet 10.1.0.0 255.255.255.0
+        set dst-subnet 10.2.0.0 255.255.255.0
+    next
+end
+\end{verbatim}
+
+\section{List of Contributions}
+% TODO: tbd 
+\section{High-Level Design}
+% TODO: tbd
+\section{Report structure}
+The report is structured as follows:
+\begin{itemize}
+    \item \textbf{Chapter 1: Introduction} - Provides an overview of the project, including the problem statement, aims and objectives, current solutions, our solution, key technical details, list of contributions, high-level design, and report structure.
+    \item \textbf{Chapter 2: Background} - Provides background information on the project, including the current network infrastructure at Yarmouk University.
+    \item \textbf{Chapter 3: Design} - Describes the design of the project, including the network topology, FortiGate firewalls, Site-to-Site VPN, DMZ, WAF, SD-WAN, network security services, network management and monitoring, wireless network, load balancing and redundancy, network access control, scalability and future-proofing, and example configuration details.
+    \item \textbf{Chapter 4: Implementation} - Describes the implementation of the project, including the configuration of FortiGate firewalls, Site-to-Site VPN, DMZ, WAF, SD-WAN, network security services, network management and monitoring, wireless network, load balancing and redundancy, network access control, and scalability and future-proofing.
+    \item \textbf{Chapter 5: Results and Discussion} - Presents the results of the project and discusses the findings.
+    \item \textbf{Chapter 6: Economical, Ethic, and Contemporary Issues} - Discusses the economical, ethical, and contemporary issues related to the project. % TODO: Change description 
+
+    \item \textbf{Chapter 7: Project Management} - Describes the project management process, including the project plan, timeline, and resources.
+    \item \textbf{Chapter 8: Conclusion and Future Work} - Provides a conclusion to the project and suggests future work.
+    \item \textbf{References} - Lists the references used in the report.
+    \item \textbf{Appendices} - Includes any additional information related to the project, such as the user manual.
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter{Background}
+\section{Overview and context}
+%in easy to understand terms, explain the problem
+% TODO: test internet load balancing and cite
+Yarmouk University has outdated network infrastructure that struggles to serve the large student body and academic and technical staff over two large campuses. The network lacks redundancy and load balancing. The current network infrastructure is not suitable for the size and complexity of the university. In our modern interconnected world, a reliable and secure network is essential for the university to function effectively; a wide-spanning WiFi network is vital for students and staff to access the internet and university resources. Additionally, computer labs need a dependable backbone to function properly.
+\section{Target Market - Yarmouk University}
+Yarmouk University is a public university in Jordan, located in Irbid. It was established in 1976 and has grown to become one of the largest universities in Jordan. The university offers a wide range of undergraduate and postgraduate programs in various fields, including engineering, science, arts, and humanities. Yarmouk University has a large student body, with over 41,000 students enrolled in various programs. The university has multiple campuses, including the main campus and the south campus, which are located in different parts of Irbid. The university has a diverse student population, with students from different backgrounds and nationalities. The university is known for its high-quality education and research programs, and it has a strong reputation in the region. Yarmouk University is committed to providing its students with a supportive and inclusive learning environment, and it is constantly striving to improve its facilities and services to meet the needs of its students and staff.\cite{YU}
+
+\section{Potential Ethical and Environmental Issues}
+% TODO: citation needed on solar
+Yarmouk University already uses 100\% solar energy for its power needs, and the network infrastructure is not energy-intensive. The project will not have a significant environmental impact. The project will not have any ethical issues, as it aims to improve the network infrastructure for the benefit of the university community.
+
+\section{Other Approaches}
+Most organizations utilize CISCO systems since it was ubiquitous in the networking industry until mid 2010s. CISCO provided unmatched stability and consistency, but at the expense of cost and high level of expertise needed to setup and maintain, as it mainly relies on commands. CISCO's monopoly caused its innovation to stagnate, and prices to go up. They only offered basic systems, especially when it came to firewalls.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter{Design}
+
+\section{Design Overview}
+\subsection{Design Description}
+The design of the project will focus on enhancing the network connectivity for Yarmouk University by using Fortinet products. The project will implement a Hierarchical networking design for the main university campus and another one for the South campus, and connect them using Site-To-Site VPN to provide a secure connection between the two buildings. The project will also include a protection layer for the data center in the university using DMZ where the DMZ will include web servers and any service that is ok to be public. The project will also implement a Web Application Firewall to protect the web servers in the university from any attacks. One of the main focuses of this project is to provide redundancy and load balancing for the network using various technologies like SD-WAN and link monitoring for Internet connectivity and High Availability (HA) for FortiGate redundancy. FortiGates will also provide services like Web Filtering and Application Control to control the network traffic and prevent any unwanted traffic from entering the network.\cite{RedLB} We will be using various Fortinet products like FortiSwitches, FortiAPs, FortiAnalyzer, and FortiManager to provide a complete solution for the university's network infrastructure.
+
+\subsection{Detailed figure}
+\includepdf[pages={1,2}]{GP Files/Topology.pdf}
+\section{Design Details}
+\subsection{Design Specifications}
+This project requires 2 server room (which may already exist), heavy-duty cooling, uninterruptible power supplies, and a backup generator. The project will also require a large number of Fortinet devices, including FortiGate firewalls, FortiSwitches, FortiAPs, FortiAnalyzer, and FortiManager. The project will also require a high-speed internet connection and a secure connection between the main campus and the south campus. The project will also require a team of network engineers and security experts for regular maintenance and vulnerability testing of the network infrastructure. This project will also require extra server racks for redundant devices. Both indoor and outdoor FortiAPs are to be used for enhanced WiFi coverage. The project will also require at least two high-speed internet connections from different ISPs to ensure minimum internet outage time. The project also requires cabling, using fiber connections for the higher level devices at high speeds, e.g. FortiGates to core FortiSwitches or FortiGates to servers, and CAT6A for inter-switch connectivity and access points, and CAT6 for end-users and terminal devices.
+
+\section{Design Process}
+% TODO: tbd
+
+\section{Legal Aspects}
+% TODO: Talk about licensing
+
+\section{Design Constraints}
+% TODO: cite money issue
+Yarmouk University is usually 
+\chapter{Implementation}
+
+\chapter{Results and Discussion}
+
+\chapter{Economical, Ethic, and Contemporary Issues}
+
+\chapter{Project Management}
+
+\chapter{Conclusion and Future Work}
+% References
+\newpage
+\bibliographystyle{plain}
+\bibliography{references}
+
+% Appendices
+\newpage
+
+\begin{appendices}
+
+\chapter{User Manual}
+
+\end{appendices}
+
+
+\end{document}
+
