@@ -4,7 +4,7 @@
 \usepackage{geometry}
 \usepackage{xcolor}
 \usepackage{fancyhdr}
-\usepackage{setspace}\doublespacing % for double spacing
+\usepackage{setspace}\doublespacing 
 \usepackage{indentfirst}
 \usepackage{appendix}
 \usepackage{titlesec}
@@ -17,40 +17,40 @@
 \patchcmd{\@citex}{\hskip\@citepunct}{\hskip\@citepunct\footnotesize}{}{}
 \makeatother
 
-\titleformat{\chapter}[block] % Change 'hang' to 'block' for one-liner titles
-  {\normalfont\Large\bfseries\color{black}} % Large font size for the title, change as needed
-  {\thechapter.} % Chapter number
-  {0.5em} % Space between chapter number and title
-  {} % Before-code
-  [{\color{darkblue}\titlerule[2pt]}] % After-code - dark blue line after the title
+\titleformat{\chapter}[block] 
+  {\normalfont\Large\bfseries\color{black}} 
+  {\thechapter.} 
+  {0.5em} 
+  {} 
+  [{\color{darkblue}\titlerule[2pt]}] 
 
-% Adjust the space after the chapter title and the rule
+
 \titlespacing*{\chapter}
-  {0pt} % Left spacing
-  {-50pt} % Space before the title
-  {20pt} % Space after the title
+  {0pt} 
+  {-50pt} 
+  {20pt} 
 
-\titleformat{\section}  % which section command to format
-  {\fontsize{14}{16}\bfseries} % format for whole line
-  {\thesection} % how to show number
-  {1em} % space between number and text
-  {} % formatting for just the text
-  [] % formatting for after the text
+\titleformat{\section}  
+  {\fontsize{14}{16}\bfseries} 
+  {\thesection} 
+  {1em} 
+  {} 
+  [] 
 
-\titleformat{\subsection}  % which section command to format
-  {\fontsize{10}{12}\sffamily} % format for whole line
-  {\S\thesubsection} % how to show number
-  {2em} % space between number and text
-  {\color{blue}} % formatting for just the text
-  [] % formatting for after the text
-% Define page geometry
+\titleformat{\subsection}  
+  {\fontsize{10}{12}\sffamily} 
+  {\S\thesubsection} 
+  {2em} 
+  {\color{blue}} 
+  [] 
+
 \geometry{a4paper, top=1in, bottom=1in, left=1in, right=1in}
 
-% Define colors
+
 \definecolor{darkblue}{rgb}{0.278,0.412,0.576}
 \definecolor{darkred}{rgb}{0.5,0,0}
 
-% Define the header to include the Yarmouk University information
+
 \fancypagestyle{firstpage}{
   \fancyhf{}
   \lhead{ 
@@ -61,7 +61,7 @@
   }
   \rhead{\includegraphics[width=0.15\textwidth]{images/yarmouk_university_logo.png}}
 
-  \renewcommand{\headrulewidth}{0pt} % No horizontal line in header
+  \renewcommand{\headrulewidth}{0pt} 
   
   
 }
@@ -72,9 +72,9 @@
 \begin{document}
 
 
-% Title Page
+
 \begin{titlepage}
-\thispagestyle{firstpage} % Apply the header style to the current page
+\thispagestyle{firstpage} 
 
    \vspace*{0.5cm}
     \noindent\textcolor{darkred}{\rule{15.5cm}{1mm}}
@@ -82,20 +82,20 @@
    \begin{center}
   
        {\Large\bfseries Graduation Project Report\par}
-   \vspace{2cm} % Adjust space after the title
+   \vspace{2cm} 
    {\huge\bfseries Enhancing Network Connectivity for Yarmouk University using Fortinet products\par}
-   \vspace{2cm} % Adjust space before student names and IDs
+   \vspace{2cm} 
    {\large\bfseries Omar B. Talafhah - 2020980115 \\ 
    Zaid F. Salameh - 2020980118 \par}
    \vspace{0.5cm}
    {\large\bfseries Supervisor: Prof. Ola Taani\par}
-   \vfill % Push the following text to the bottom of the page
+   \vfill 
    Semester: Summer 2023/2024\par
    Date: \today
    \end{center}
    \thispagestyle{firstpage} 
 \end{titlepage}
-% Declaration Page
+
 \pagenumbering{roman}
 \newpage
 \section*{Students' Property Right Declaration and Anti-Plagiarism Statement}
@@ -113,7 +113,7 @@ Name: Zaid F. Salameh  \hspace{3.3cm} Signature:
 
 \end{center}
 
-% Table of Contents, List of Tables/Figures
+
 \newpage
 \tableofcontents
 \newpage
@@ -121,7 +121,7 @@ Name: Zaid F. Salameh  \hspace{3.3cm} Signature:
 \newpage
 \listoffigures
 
-% Chapters
+
 \newpage
 \chapter*{Abstract}
 Yarmouk University, like many other universities, 
@@ -150,6 +150,13 @@ We will be using various Fortinet products like FortisSwitches, FortiAPs, FortiA
 This Project aims to enhance university networking by making it more secure, 
 reliable, easier and cheaper to obtain and maintain, and provide a better user experience for the students and staff.
 
+% TODO: in person citations:
+%   IT Department: (high level) topology, number of devices (vague), if they use cisco or other, power consumption,
+%   Engr Department: number of buildings, floor plans
+%   General Services: power draw, what percentage of power is solar, finance
+
+% TODO: rewrite sections if they sound weird 
+
 \section{Background}
 Yarmouk University holds more than 41,000 students \cite{YU} and has many schools and departments, yet, the network infrastructure is outdated and does not provide adequate coverage for all areas, and connecting to the web servers in the university from outside can be a nightmare during peak times. For example, system responsiveness during registration on the \date{19th of May, 2024} was not that great, especially that only those who are expected to graduate can register.
 \section{Aims and objectives}
@@ -166,8 +173,8 @@ The main aim of this project is to enhance the network connectivity for Yarmouk 
 \end{itemize}
 
 \section{Current solutions}
-% TODO: rewrite this section
-% After SIS update in December 2023, the system responsiveness has improved, we couldn't get information from the YU IT department about the current network infrastructure since such information is confidential. But the overall behavior of the network suggests that they are using cheap products that is not suitable for the site.
+% TODO: rewrite this section; we need to get exact details about what system they have
+% After YU's Student Information System update in December 2023, the system responsiveness has improved, we couldn't get information from the YU IT department about the current network infrastructure since such information is confidential. But the overall behavior of the network suggests that they are using cheap products that is not suitable for the site.
 \section{Our solution}
 \begin{figure}[h]
     \centering
@@ -176,7 +183,7 @@ The main aim of this project is to enhance the network connectivity for Yarmouk 
     \label{fig:fortinet logo}
 \end{figure}
 % TODO: Cite all FortiDevices:tm:
-Fortinet is a network security company, based in California, USA. It provides relatively cheap, modern, and easy-to-use and maintain products that can also easily provide a great level of network security through different measures. Fortinet relies heavily on the use of FortiGate devices, which are firewalls that can be used to secure the network, as well as managing any Fortinet device connected to it. Fortinet also provides other products like FortiSwitches, FortiAPs, FortiAnalyzer, and FortiManager to provide a complete solution for the network infrastructure. 
+Fortinet is a network security company, based in California, USA.\cite{wikipedia} It provides relatively inexpensive, modern, and easy-to-use and maintain products that can also easily provide a great level of network security through different measures.\cite{sigbil} Fortinet relies heavily on the use of FortiGate devices, which are firewalls that can be used to secure the network, as well as managing any Fortinet device connected to it. Fortinet also provides other products like FortiSwitches, FortiAPs, FortiAnalyzer, and FortiManager to provide a complete solution for the network infrastructure. \cite{FortinetProducts}
 We suggest converting to Fortinet products for its great security and ease of use and maintenance, as well as it being cheaper relative to Cisco \cite{Cheaper} and other competitors.
 Our solution will include a full topology for the main university and the south campus, as well as the secure connection between them. It will also include many solutions that will provide redundancy and load balancing for the network.
 Our solution will also include a protection layer for the data center in the university using DMZ, and a Web Application Firewall to protect the web servers in the university from any attack that may occur.
@@ -308,9 +315,9 @@ end
 \end{verbatim}
 
 \section{List of Contributions}
-% TODO: tbd 
+% TODO: tbd, waiting on reply
 \section{High-Level Design}
-% TODO: tbd
+% TODO: done
 \section{Report structure}
 The report is structured as follows:
 \begin{itemize}
@@ -319,8 +326,7 @@ The report is structured as follows:
     \item \textbf{Chapter 3: Design} - Describes the design of the project, including the network topology, FortiGate firewalls, Site-to-Site VPN, DMZ, WAF, SD-WAN, network security services, network management and monitoring, wireless network, load balancing and redundancy, network access control, scalability and future-proofing, and example configuration details.
     \item \textbf{Chapter 4: Implementation} - Describes the implementation of the project, including the configuration of FortiGate firewalls, Site-to-Site VPN, DMZ, WAF, SD-WAN, network security services, network management and monitoring, wireless network, load balancing and redundancy, network access control, and scalability and future-proofing.
     \item \textbf{Chapter 5: Results and Discussion} - Presents the results of the project and discusses the findings.
-    \item \textbf{Chapter 6: Economical, Ethic, and Contemporary Issues} - Discusses the economical, ethical, and contemporary issues related to the project. % TODO: Change description 
-
+    \item \textbf{Chapter 6: Economical, Ethic, and Contemporary Issues} - Discusses the economical, ethical, and contemporary issues related to the project.
     \item \textbf{Chapter 7: Project Management} - Describes the project management process, including the project plan, timeline, and resources.
     \item \textbf{Chapter 8: Conclusion and Future Work} - Provides a conclusion to the project and suggests future work.
     \item \textbf{References} - Lists the references used in the report.
@@ -332,7 +338,7 @@ The report is structured as follows:
 \chapter{Background}
 \section{Overview and context}
 %in easy to understand terms, explain the problem
-% TODO: test internet load balancing and cite
+% TODO: test internet load balancing and cite; do on monday
 Yarmouk University has outdated network infrastructure that struggles to serve the large student body and academic and technical staff over two large campuses. The network lacks redundancy and load balancing. The current network infrastructure is not suitable for the size and complexity of the university. In our modern interconnected world, a reliable and secure network is essential for the university to function effectively; a wide-spanning WiFi network is vital for students and staff to access the internet and university resources. Additionally, computer labs need a dependable backbone to function properly.
 \section{Target Market - Yarmouk University}
 Yarmouk University is a public university in Jordan, located in Irbid. It was established in 1976 and has grown to become one of the largest universities in Jordan. The university offers a wide range of undergraduate and postgraduate programs in various fields, including engineering, science, arts, and humanities. Yarmouk University has a large student body, with over 41,000 students enrolled in various programs. The university has multiple campuses, including the main campus and the south campus, which are located in different parts of Irbid. The university has a diverse student population, with students from different backgrounds and nationalities. The university is known for its high-quality education and research programs, and it has a strong reputation in the region. Yarmouk University is committed to providing its students with a supportive and inclusive learning environment, and it is constantly striving to improve its facilities and services to meet the needs of its students and staff.\cite{YU}
@@ -359,22 +365,70 @@ The design of the project will focus on enhancing the network connectivity for Y
 This project requires 2 server room (which may already exist), heavy-duty cooling, uninterruptible power supplies, and a backup generator. The project will also require a large number of Fortinet devices, including FortiGate firewalls, FortiSwitches, FortiAPs, FortiAnalyzer, and FortiManager. The project will also require a high-speed internet connection and a secure connection between the main campus and the south campus. The project will also require a team of network engineers and security experts for regular maintenance and vulnerability testing of the network infrastructure. This project will also require extra server racks for redundant devices. Both indoor and outdoor FortiAPs are to be used for enhanced WiFi coverage. The project will also require at least two high-speed internet connections from different ISPs to ensure minimum internet outage time. The project also requires cabling, using fiber connections for the higher level devices at high speeds, e.g. FortiGates to core FortiSwitches or FortiGates to servers, and CAT6A for inter-switch connectivity and access points, and CAT6 for end-users and terminal devices.
 
 \section{Design Process}
-% TODO: tbd
+% TODO: done
 
 \section{Legal Aspects}
-% TODO: Talk about licensing
+% TODO: done
 
 \section{Design Constraints}
 % TODO: cite money issue
-Yarmouk University is usually 
+Yarmouk University is usually
+
+\section{Design Alternatives}
+MPLS is a great solution for connecting multiple sites, but it is expensive and requires a high level of expertise to set up and maintain. Site-to-Site VPN is a more cost-effective solution that provides a secure connection between two sites over the internet. It is easier to set up and maintain and provides a good level of security for most applications. For this project, we chose to use Site-to-Site VPN to connect the main campus and the south campus, as it provides a good balance between cost, security, and ease of use.
+\section{Design Considerations Table}
+\begin{tabular}
+    \begin{table}[h!]
+        \centering
+        \begin{tabular}{|>{\centering\arraybackslash}m{5cm}|>{\centering\arraybackslash}m{5cm}|>{\centering\arraybackslash}m{5cm}|}
+            \hline
+            \textbf{Design consideration} & \textbf{Project application} & \textbf{Relevant location in report} \\
+            \hline
+            Performance & High & Ch4 \\
+            \hline
+            Serviceability & Easy to service & Idr \\
+            \hline
+            Economic & Good for cheap people & Ch6 \\
+            \hline
+            Environmental & No significant impact & 2.ethical \\
+            \hline
+        \end{tabular}
+        \caption{Design Considerations}
+        \label{tab:design_considerations}
+    \end{table}
+\end{tabular}
 \chapter{Implementation}
+% TODO: done
 
 \chapter{Results and Discussion}
+% TODO: gp2
 
 \chapter{Economical, Ethic, and Contemporary Issues}
+\section{Preliminary Cost Estimation}
+\section{Relevant Codes of Ethics and Moral Frameworks}
+The project will adhere to the following codes of ethics and moral frameworks:
+\begin{itemize}
+    % TODO: Check and Cite
+    \item \textbf{ACM Code of Ethics and Professional Conduct}: The project will follow the ACM Code of Ethics and Professional Conduct, which outlines the ethical responsibilities of computing professionals. The project team will ensure that all decisions and actions are in line with the principles of the ACM Code of Ethics.
+    \item \textbf{IEEE Code of Ethics}: The project will also follow the IEEE Code of Ethics, which provides guidelines for ethical behavior in the engineering profession. The project team will adhere to the principles of the IEEE Code of Ethics in all aspects of the project.
+    \item \textbf{Fortinet Code of Business Conduct}: The project will also adhere to the Fortinet Code of Business Conduct, which outlines the ethical standards and principles that Fortinet employees and partners are expected to follow. The project team will ensure that all interactions with Fortinet and the use of Fortinet products are in line with the Fortinet Code of Business Conduct.
+\end{itemize}
+\section{Relevant Environmental Considerations}
+% TODO
 
+\section{Relevance to Jordan and Region}
+One of the things we aim to achieve is to standardize network infrastructure in Jordanian universities, and produce a standard that any institution can follow when installing/renewing their network infrastructure. This project can be used as a template for other universities in Jordan and the region to enhance their network connectivity and security using Fortinet products.
 \chapter{Project Management}
-
+\section{Schedule and Time Management}
+If this project to be implemented, it will take around 2 months to complete. The project will be divided into several phases, including the design phase, implementation phase, testing phase, and deployment phase. The project team will work closely with the collaborate IT department to ensure that the project is completed on time and within budget. The project team will also provide regular updates to the university's management team to keep them informed of the project's progress.
+\section{Resource and Cost Management}
+Resource and cost management will be handled by the university's presidential council, which will allocate the necessary resources and funds for the project. The project team will collaborate with the university's finance department to ensure that the project is completed within budget.
+\section{Quality Management}
+The project team will follow a strict quality management process to ensure that the project meets the university's requirements and standards. The project team will conduct regular testing and quality assurance checks to identify and resolve any issues that may arise during the project. The project team will also provide training to the university's IT staff to ensure that they are familiar with the new network infrastructure and can effectively manage and maintain it.
+\section{Risk Management}
+The project team is committed to minimizing downtime by strategically utilizing breaks, nights, and weekends. This approach includes broadcasting scheduled downtimes to users to ensure they are informed and can plan accordingly. As a precautionary measure, the team will regularly backup data to safeguard against unexpected incidents. The hardware installation will follow a top-down approach, starting from the FortiGates and moving to the FortiAPs as per the roadmap. This method is designed to minimize downtime and ensure a smooth transition. In addition, the team will conduct a comprehensive risk assessment to pinpoint potential risks. These risks could range from hardware failures and software bugs to network outages. Once identified, a risk management plan will be developed to mitigate these risks. The team will devise strategies aimed at minimizing the impact of these risks on the project. Furthermore, the team will create a contingency plan to address any unforeseen issues that may arise during the project's lifecycle. This plan will provide a roadmap for dealing with potential problems and ensure the project stays on track.
+\section{Project Procurement}
+Once approved, YU project manager will contact a networking services company (e.g. Specialized Technical Services, or FutureTech) who will handle the procurement of the necessary hardware and software. The company will be responsible for sourcing the Fortinet products, as well as any additional equipment required for the project. The company will also be responsible for the installation and configuration of the network infrastructure, as well as providing training to the university's IT staff. The project manager will work closely with the company to ensure that the project is completed on time and within budget.
 \chapter{Conclusion and Future Work}
 % References
 \newpage
