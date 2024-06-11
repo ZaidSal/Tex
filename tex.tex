@@ -69,6 +69,7 @@
 }
 \renewcommand{\bibname}{References}
 
+
 \begin{document}
 
 % Title Page
@@ -165,9 +166,6 @@ The main aim of this project is to enhance the network connectivity for Yarmouk 
     \item Use various Fortinet products like FortiSwitches, FortiAPs, FortiAnalyzer, and FortiManager to provide a complete solution for the university's network infrastructure.
 \end{itemize}
 
-\section{Current solutions}
-% TODO: rewrite this section
-% After SIS update in December 2023, the system responsiveness has improved, we couldn't get information from the YU IT department about the current network infrastructure since such information is confidential. But the overall behavior of the network suggests that they are using cheap products that is not suitable for the site.
 \section{Our solution}
 \begin{figure}[h]
     \centering
@@ -306,16 +304,13 @@ config vpn ipsec phase2-interface
 end
 \end{verbatim}
 
-\section{List of Contributions}
-% TODO: tbd 
-%1.7	A list of contributions with short descriptions that you can claim from your work.
 
 \newpage
 \section{High-Level Design}
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.8\textwidth]{images/HLfig.png}
-    \caption{Fortinet Logo}
+    \caption{High Level Design}
     \label{fig:High Level Design}
 \end{figure}
 
@@ -348,12 +343,13 @@ Yarmouk University is a public university in Jordan, located in Irbid. It was es
 \section{Potential Ethical and Environmental Issues}
 Yarmouk University use solar energy for its power needs, and the network infrastructure is not energy-intensive. The project will not have a significant environmental impact. The project will not have any ethical issues, as it aims to improve the network infrastructure for the benefit of the university community \cite{Solar}. Figure \ref{fig:YUMap} shows that Yarmouk University installed solar panels across the campus. 
 %%Picture from Google maps%%
-\begin{figure}
+\begin{figure}[h]
     \centering
     \includegraphics[width=0.8\textwidth]{images/Maps.png}
     \caption{Solar Panels at Yarmouk University as seen on Google Maps}
     \label{fig:YUMap}
 \end{figure}
+\newpage
 \section{Other Approaches}
 Most organizations utilize CISCO systems since it was ubiquitous in the networking industry until mid 2010s. CISCO provided unmatched stability and consistency, but at the expense of cost and high level of expertise needed to setup and maintain, as it mainly relies on commands. CISCO's monopoly caused its innovation to stagnate, and prices to go up. They only offered basic systems, especially when it came to firewalls.\cite{FNvsCISCO} \cite{CISCOInntoFin}
 
@@ -378,7 +374,7 @@ This project requires:
     \item At least two high-speed internet connections from different ISPs to minimize internet outage time.
     \item Cabling: fiber connections for high-speed links between core devices (e.g., FortiGates to core FortiSwitches or servers) and CAT6A for inter-switch connectivity and access points. CAT6 cabling will be used for end-users and terminal devices.
 \end{enumerate}
-
+\newpage
 \section{Design Process}
 This project will include countless technologies that will enhance networking around Yarmouk University, many of which is provided by Fortinet.
 \subsection{Hierarchical Networking Design}
@@ -477,7 +473,7 @@ Network Address Translation (NAT) is a process that allows devices on a private 
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.8\textwidth]{images/nat.png}
-    \caption{FortiGate NAT Configuration}
+    \caption{FortiGate NAT Configuration \cite{NATIMG}}
     \label{fig:NAT}
 \end{figure}
 
@@ -490,11 +486,11 @@ Link monitoring is a feature that allows the network administrator to monitor th
 High Availability (HA) is a feature that allows the network administrator to ensure that the network is always available. HA can be used to provide redundancy for critical devices in the network, such as firewalls and switches. HA can be used to ensure that if one device fails, another device takes over automatically. This will provide a high level of availability for the network and ensure that users always have access to the resources they need. HA can also be used to provide load balancing for the network, so that traffic is distributed evenly across multiple devices. This will ensure that the network is always available and that users always have access to the resources they need. HA is used in conjunction with SD-WAN technology to provide redundancy and load balancing for the network. Figure \ref{fig:HA} shows an example of HA configuration on a FortiGate device.
 \begin{figure}[h]
     \centering
-    \includegraphics[width=0.8\textwidth]{images/HA.png}
+    \includegraphics[width=0.5\textwidth]{images/HA.png}
     \caption{FortiGate HA Configuration}
     \label{fig:HA}
 \end{figure}
-
+\newpage
 As the above topology shows, a link between the 2 HA devices known as the heartbeat is required to ensure that the slave knows when to takeover when the master fails. Devices in HA mode ping each other in regular intervals and wait for a response from the other device. If the other device replies, things proceed as is, if there is no reply to the ping, another ping is sent to check if the device really failed or not, if still there is no reply, and the slave is being problematic, the master just operates normally and warns the administration that slave might have failed, if the master is the one that is not responding, slave takes over, advertises itself as the gateway to the switches until the issue is fixed, then the master will take over again and advertise itself as the gateway. It is recommended to have a redundant heartbeat, in an active-passive mode; if we had only 1 link and it failed, the slave will assume that the master failed, advertising itself as the gateway, meaning that 2 FortiGates assume that they are the the active gateway, causing confusion for the core switches and thus the site goes down. This project will utilize HA for the FortiGates in an active-passive mode, as this will increase the life-span of the overall topology, lowering costs in the long run, and minimizing down-time. \cite{HA} \cite{HA2}
 
 \subsection{DMZ}
@@ -597,7 +593,7 @@ The project will adhere to industry standards and best practices for network des
 
 \section{Design Alternatives}
 MPLS is a great solution for connecting multiple sites, but it is expensive and requires a high level of expertise to set up and maintain. Site-to-Site VPN is a more cost-effective solution that provides a secure connection between two sites over the internet. It is easier to set up and maintain and provides a good level of security for most applications. For this project, we chose to use Site-to-Site VPN to connect the main campus and the south campus, as it provides a good balance between cost, security, and ease of use.
-
+\newpage
 \section{Design Considerations Table}
 \begin{table}[h]
     \centering
